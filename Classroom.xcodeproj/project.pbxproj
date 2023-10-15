@@ -11,6 +11,12 @@
 		A050DBD42ADC6BCB003A230D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A050DBD32ADC6BCB003A230D /* ContentView.swift */; };
 		A050DBD62ADC6BCC003A230D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A050DBD52ADC6BCC003A230D /* Assets.xcassets */; };
 		A050DBDA2ADC6BCC003A230D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A050DBD92ADC6BCC003A230D /* Preview Assets.xcassets */; };
+		A050DBE12ADC6C0C003A230D /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = A050DBE02ADC6C0C003A230D /* Student.swift */; };
+		A050DBE32ADC6C12003A230D /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = A050DBE22ADC6C12003A230D /* Class.swift */; };
+		A050DBE62ADC6F3A003A230D /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A050DBE52ADC6F3A003A230D /* Attendance.swift */; };
+		A050DBE82ADC7669003A230D /* ClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A050DBE72ADC7669003A230D /* ClassroomView.swift */; };
+		A050DBEA2ADC77B0003A230D /* CreateClassroomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A050DBE92ADC77B0003A230D /* CreateClassroomView.swift */; };
+		A050DBEC2ADC78AB003A230D /* StudentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A050DBEB2ADC78AB003A230D /* StudentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +26,12 @@
 		A050DBD52ADC6BCC003A230D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A050DBD72ADC6BCC003A230D /* Classroom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Classroom.entitlements; sourceTree = "<group>"; };
 		A050DBD92ADC6BCC003A230D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A050DBE02ADC6C0C003A230D /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
+		A050DBE22ADC6C12003A230D /* Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
+		A050DBE52ADC6F3A003A230D /* Attendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
+		A050DBE72ADC7669003A230D /* ClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassroomView.swift; sourceTree = "<group>"; };
+		A050DBE92ADC77B0003A230D /* CreateClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassroomView.swift; sourceTree = "<group>"; };
+		A050DBEB2ADC78AB003A230D /* StudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,11 +64,15 @@
 		A050DBD02ADC6BCB003A230D /* Classroom */ = {
 			isa = PBXGroup;
 			children = (
+				A050DBE42ADC6F27003A230D /* SwiftDataModels */,
 				A050DBD12ADC6BCB003A230D /* ClassroomApp.swift */,
 				A050DBD32ADC6BCB003A230D /* ContentView.swift */,
 				A050DBD52ADC6BCC003A230D /* Assets.xcassets */,
 				A050DBD72ADC6BCC003A230D /* Classroom.entitlements */,
 				A050DBD82ADC6BCC003A230D /* Preview Content */,
+				A050DBE72ADC7669003A230D /* ClassroomView.swift */,
+				A050DBE92ADC77B0003A230D /* CreateClassroomView.swift */,
+				A050DBEB2ADC78AB003A230D /* StudentView.swift */,
 			);
 			path = Classroom;
 			sourceTree = "<group>";
@@ -67,6 +83,16 @@
 				A050DBD92ADC6BCC003A230D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A050DBE42ADC6F27003A230D /* SwiftDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				A050DBE22ADC6C12003A230D /* Class.swift */,
+				A050DBE02ADC6C0C003A230D /* Student.swift */,
+				A050DBE52ADC6F3A003A230D /* Attendance.swift */,
+			);
+			path = SwiftDataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +165,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A050DBE32ADC6C12003A230D /* Class.swift in Sources */,
 				A050DBD42ADC6BCB003A230D /* ContentView.swift in Sources */,
+				A050DBE82ADC7669003A230D /* ClassroomView.swift in Sources */,
+				A050DBEA2ADC77B0003A230D /* CreateClassroomView.swift in Sources */,
+				A050DBE12ADC6C0C003A230D /* Student.swift in Sources */,
 				A050DBD22ADC6BCB003A230D /* ClassroomApp.swift in Sources */,
+				A050DBEC2ADC78AB003A230D /* StudentView.swift in Sources */,
+				A050DBE62ADC6F3A003A230D /* Attendance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
