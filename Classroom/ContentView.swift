@@ -13,6 +13,7 @@ struct ContentView: View {
 	@Environment(\.modelContext) var context
 	@Query var classrooms: [Classroom]
 	@State private var selectedClassroom: Classroom?
+	@State private var editedClassroom: Classroom?
 	@State private var showCreateClassroom = false
 	
 	var body: some View {
@@ -26,6 +27,24 @@ struct ContentView: View {
 							.font(.subheadline)
 					}
 					.tag(classroom)
+					.contextMenu {
+						Button(action: {
+							editedClassroom = classroom
+						}, label: {
+							Text("Edit")
+						})
+						
+						Button(action: {
+							if selectedClassroom == classroom {
+								selectedClassroom = nil
+							}
+							
+							context.delete(classroom)
+							
+						}, label: {
+							Label("Delete", systemImage: "trash")
+						})
+					}
 				}
 			} detail: {
 				if let selectedClassroom {
@@ -44,8 +63,16 @@ struct ContentView: View {
 				}
 			}
 			.sheet(isPresented: $showCreateClassroom) {
-				CreateClassroomView()
-					.frame(minWidth: 400, minHeight: 400)
+				NavigationStack {
+					CreateClassroomView()
+						.frame(minWidth: 400, minHeight: 400)
+				}
+			}
+			.sheet(item: $editedClassroom) { classroom in
+				NavigationStack {
+					EditClassroomView(classroom: classroom)
+						.frame(minWidth: 400, minHeight: 400)
+				}
 			}
 		#else
 			NavigationView {
@@ -60,6 +87,19 @@ struct ContentView: View {
 								.font(.subheadline)
 						}
 					}
+					.swipeActions {
+						Button(role: .destructive) {
+							context.delete(classroom)
+						} label: {
+							Label("Remove", systemImage: "trash")
+						}
+						
+						Button {
+							editedClassroom = classroom
+						} label: {
+							Label("Edit", systemImage: "pencil")
+						}
+					}
 				}
 				.navigationTitle("Classrooms")
 				.toolbar {
@@ -70,6 +110,11 @@ struct ContentView: View {
 							Label("Add Classroom", systemImage: "plus")
 						}
 					}
+				}
+			}
+			.sheet(item: $editedClassroom) { classroom in
+				NavigationStack {
+					EditClassroomView(classroom: classroom)
 				}
 			}
 			.sheet(isPresented: $showCreateClassroom) {

@@ -38,6 +38,7 @@ struct CreateClassroomView: View {
 				} label: {
 					Text("Add Student")
 				}
+				.disabled(student.name.isEmpty || student.surname.isEmpty)
 
 			}
 			

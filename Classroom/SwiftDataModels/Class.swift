@@ -23,7 +23,6 @@ final class Classroom {
 extension Classroom {
 	
 #if DEBUG
-	
 	static var `default`: Classroom = .init(title: "Specjalistyczne Oprogramowanie Narzędziowe",
 											students: [
 												Student(name: "Jan", surname: "Kowalski"),
