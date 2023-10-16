@@ -23,7 +23,7 @@ struct ContentView: View {
 					VStack(alignment: .leading) {
 						Text(classroom.title)
 							.font(.headline)
-						Text("Number of students: \(classroom.students.count)")
+						Text("Number of students: \(classroom.students?.count ?? 0)")
 							.font(.subheadline)
 					}
 					.tag(classroom)
@@ -83,7 +83,7 @@ struct ContentView: View {
 						VStack(alignment: .leading) {
 							Text(classroom.title)
 								.font(.headline)
-							Text("Number of students: \(classroom.students.count)")
+							Text("Number of students: \(classroom.students?.count ?? 0)")
 								.font(.subheadline)
 						}
 					}

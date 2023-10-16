@@ -10,9 +10,12 @@ import SwiftData
 
 @Model
 final class Student {
-	var name: String
-	var surname: String
-	var classrooms: [Classroom]
+	var name = ""
+	var surname = ""
+	var classrooms: [Classroom]? = []
+	
+	@Relationship(deleteRule: .cascade, inverse: \Attendance.student)
+	var attendance: [Attendance]? = []
 	
 	init(name: String, surname: String, classrooms: [Classroom] = []) {
 		self.name = name

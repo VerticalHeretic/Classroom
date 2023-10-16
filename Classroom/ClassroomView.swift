@@ -12,8 +12,10 @@ struct ClassroomView: View {
 	
     var body: some View {
 		List {
-			ForEach(classroom.students) { student in
-				StudentView(student: student)
+			if let students = classroom.students {
+				ForEach(students) { student in
+					StudentView(student: student)
+				}
 			}
 		}
     }

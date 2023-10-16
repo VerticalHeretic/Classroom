@@ -34,6 +34,7 @@
 		A050DBE92ADC77B0003A230D /* CreateClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClassroomView.swift; sourceTree = "<group>"; };
 		A050DBEB2ADC78AB003A230D /* StudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentView.swift; sourceTree = "<group>"; };
 		A0C0265B2ADDAA3600E3CC81 /* EditClassroomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClassroomView.swift; sourceTree = "<group>"; };
+		A0C0265D2ADDB30500E3CC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,7 @@
 		A050DBD02ADC6BCB003A230D /* Classroom */ = {
 			isa = PBXGroup;
 			children = (
+				A0C0265D2ADDB30500E3CC81 /* Info.plist */,
 				A050DBE42ADC6F27003A230D /* SwiftDataModels */,
 				A050DBD12ADC6BCB003A230D /* ClassroomApp.swift */,
 				A050DBD32ADC6BCB003A230D /* ContentView.swift */,
@@ -310,6 +312,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Classroom/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -348,6 +351,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Classroom/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

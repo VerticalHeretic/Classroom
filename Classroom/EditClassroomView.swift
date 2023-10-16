@@ -14,7 +14,6 @@ struct EditClassroomView: View {
 	
 	@Bindable var classroom: Classroom
 	@State private var student: Student = Student(name: "", surname: "")
-	@State private var selectedStudents: [Student] = []
 	@Query private var students: [Student]
 	
 	var body: some View {
@@ -39,34 +38,38 @@ struct EditClassroomView: View {
 				}
 				.disabled(student.name.isEmpty || student.surname.isEmpty)
 				
-				ForEach(students.filter { student in !classroom.students.contains(student) }) { student in
-					StudentView(student: student)
-						.onTapGesture {
-							classroom.students.append(student)
-						}
+				if let classroomStudents = classroom.students {
+					ForEach(students.filter { student in !classroomStudents.contains(student) }) { student in
+						StudentView(student: student)
+							.onTapGesture {
+								classroom.students?.append(student)
+							}
+					}
 				}
 			}
 			
-			Section("Classroom students") {
-				ForEach(classroom.students) { student in
-					StudentView(student: student)
-					#if os(macOS)
-						.contextMenu {
-							Button {
-								classroom.students.removeAll { $0.id == student.id }
-							} label: {
-								Text("Remove")
+			if let students = classroom.students {
+				Section("Classroom students") {
+					ForEach(students) { student in
+						StudentView(student: student)
+#if os(macOS)
+							.contextMenu {
+								Button {
+									classroom.students?.removeAll { $0.id == student.id }
+								} label: {
+									Text("Remove")
+								}
 							}
-						}
-					#else
-						.swipeActions {
-							Button {
-								classroom.students.removeAll { $0.id == student.id }
-							} label: {
-								Label("Remove", systemImage: "trash")
+#else
+							.swipeActions {
+								Button {
+									classroom.students?.removeAll { $0.id == student.id }
+								} label: {
+									Label("Remove", systemImage: "trash")
+								}
 							}
-						}
-					#endif
+#endif
+					}
 				}
 			}
 		}
