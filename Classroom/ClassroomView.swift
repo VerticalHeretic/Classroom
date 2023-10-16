@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClassroomView: View {
-	@Bindable var classroom: Classroom
+	var classroom: Classroom
 	
     var body: some View {
 		List {

@@ -23,16 +23,6 @@ struct CreateClassroomView: View {
 			Section {
 				HStack {
 					TextField("Classroom Title", text: $classroom.title)
-					Button {
-						withAnimation {
-							context.insert(classroom)
-							classroom.students = selectedStudents
-							dismiss()
-						}
-					} label: {
-						Label("Save", systemImage: "plus")
-					}
-					.disabled(classroom.title.isEmpty || selectedStudents.isEmpty)
 				}
 			}
 			
@@ -76,11 +66,22 @@ struct CreateClassroomView: View {
 					}
 				}
 			}
-			
-		
-
 		}
 		.navigationTitle("Create Classroom")
+		.toolbar {
+			ToolbarItem {
+				Button {
+					withAnimation {
+						context.insert(classroom)
+						classroom.students = selectedStudents
+						dismiss()
+					}
+				} label: {
+					Label("Save", systemImage: "plus")
+				}
+				.disabled(classroom.title.isEmpty || selectedStudents.isEmpty)
+			}
+		}
     }
 }
 

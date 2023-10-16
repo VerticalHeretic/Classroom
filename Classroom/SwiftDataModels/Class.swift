@@ -11,6 +11,7 @@ import SwiftData
 @Model
 final class Classroom {
 	var title: String
+	@Relationship(inverse: \Student.classrooms)
 	var students: [Student]
 	
 	init(title: String = "", students: [Student] = []) {
