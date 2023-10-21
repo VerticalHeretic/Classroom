@@ -15,6 +15,9 @@ struct ClassroomApp: App {
             ContentView()
         }
 		.modelContainer(ClassroomContainer.create())
+        .commands {
+            Menus()
+        }
     }
 }
 

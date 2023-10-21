@@ -7,19 +7,29 @@
 
 import SwiftUI
 import SwiftData
+import Observation
+
+@Observable final class ContentViewModel {
+    
+    var selectedClassroom: Classroom?
+    var editedClassroom: Classroom?
+    var showCreateClassroom = false
+    
+    // MARK: Attendance Module
+    var studentsAttending: [Student] = []
+    var attendanceMode = false
+}
 
 struct ContentView: View {
 	
 	@Environment(\.modelContext) var context
 	@Query var classrooms: [Classroom]
-	@State private var selectedClassroom: Classroom?
-	@State private var editedClassroom: Classroom?
-	@State private var showCreateClassroom = false
+    @Bindable var model = ContentViewModel()
 	
 	var body: some View {
 		#if os(macOS)
 			NavigationSplitView {
-				List(classrooms, selection: $selectedClassroom) { classroom in
+                List(classrooms, selection: $model.selectedClassroom) { classroom in
 					VStack(alignment: .leading) {
 						Text(classroom.title)
 							.font(.headline)
@@ -29,14 +39,14 @@ struct ContentView: View {
 					.tag(classroom)
 					.contextMenu {
 						Button(action: {
-							editedClassroom = classroom
+                            model.editedClassroom = classroom
 						}, label: {
 							Text("Edit")
 						})
 						
 						Button(action: {
-							if selectedClassroom == classroom {
-								selectedClassroom = nil
+                            if model.selectedClassroom == classroom {
+                                model.selectedClassroom = nil
 							}
 							
 							context.delete(classroom)
@@ -47,8 +57,8 @@ struct ContentView: View {
 					}
 				}
 			} detail: {
-				if let selectedClassroom {
-					ClassroomView(classroom: selectedClassroom)
+                if let selectedClassroom = model.selectedClassroom {
+                    ClassroomView(classroom: selectedClassroom, attendanceMode: $model.attendanceMode, studentsAttending: $model.studentsAttending)
 				} else {
 					EmptyView()
 				}
@@ -56,19 +66,47 @@ struct ContentView: View {
 			.toolbar {
 				ToolbarItem {
 					Button {
-						showCreateClassroom = true
+                        model.showCreateClassroom = true
 					} label: {
 						Label("Add Classroom", systemImage: "plus")
 					}
 				}
+                
+                if let selectedClassroom = model.selectedClassroom, let students = selectedClassroom.students {
+                    ToolbarItem {
+                        Button {
+                            if model.attendanceMode {
+                                if !model.studentsAttending.isEmpty {
+                                    model.studentsAttending.forEach {
+                                        let attendance = Attendance(student: $0, classroom: selectedClassroom, date: Date(), isPresent: true)
+                                        context.insert(attendance)
+                                    }
+                                    
+                                    students.filter { !model.studentsAttending.contains($0) }.forEach {
+                                        let attendance = Attendance(student: $0, classroom: selectedClassroom, date: Date(), isPresent: false)
+                                        context.insert(attendance)
+                                    }
+                                   
+                                    model.studentsAttending.removeAll()
+                                }
+                                
+                                model.attendanceMode = false
+                            } else {
+                                model.attendanceMode = true
+                            }
+                        } label: {
+                            Label("Attendance Mode", systemImage: "person.fill.checkmark")
+                        }
+                    }
+                }
 			}
-			.sheet(isPresented: $showCreateClassroom) {
+            .sheet(isPresented: $model.showCreateClassroom) {
 				NavigationStack {
 					CreateClassroomView()
 						.frame(minWidth: 400, minHeight: 400)
 				}
 			}
-			.sheet(item: $editedClassroom) { classroom in
+            .sheet(item: $model.editedClassroom) { classroom in
 				NavigationStack {
 					EditClassroomView(classroom: classroom)
 						.frame(minWidth: 400, minHeight: 400)
@@ -78,7 +116,7 @@ struct ContentView: View {
 			NavigationView {
 				List(classrooms) { classroom in
 					NavigationLink {
-						ClassroomView(classroom: classroom)
+                        ClassroomView(classroom: classroom, attendanceMode: $model.attendanceMode, studentsAttending: $model.studentsAttending)
 					} label: {
 						VStack(alignment: .leading) {
 							Text(classroom.title)
@@ -95,7 +133,7 @@ struct ContentView: View {
 						}
 						
 						Button {
-							editedClassroom = classroom
+                            model.editedClassroom = classroom
 						} label: {
 							Label("Edit", systemImage: "pencil")
 						}
@@ -105,19 +143,19 @@ struct ContentView: View {
 				.toolbar {
 					ToolbarItem {
 						Button {
-							showCreateClassroom = true
+                            model.showCreateClassroom = true
 						} label: {
 							Label("Add Classroom", systemImage: "plus")
 						}
 					}
 				}
 			}
-			.sheet(item: $editedClassroom) { classroom in
+            .sheet(item: $model.editedClassroom) { classroom in
 				NavigationStack {
 					EditClassroomView(classroom: classroom)
 				}
 			}
-			.sheet(isPresented: $showCreateClassroom) {
+            .sheet(isPresented: $model.showCreateClassroom) {
 				NavigationStack {
 					CreateClassroomView()
 						.presentationDetents([.medium, .large])

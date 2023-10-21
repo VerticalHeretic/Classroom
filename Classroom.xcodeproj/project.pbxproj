@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0422C502AE3A913005E9E97 /* Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0422C4F2AE3A913005E9E97 /* Menus.swift */; };
 		A050DBD22ADC6BCB003A230D /* ClassroomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A050DBD12ADC6BCB003A230D /* ClassroomApp.swift */; };
 		A050DBD42ADC6BCB003A230D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A050DBD32ADC6BCB003A230D /* ContentView.swift */; };
 		A050DBD62ADC6BCC003A230D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A050DBD52ADC6BCC003A230D /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0422C4F2AE3A913005E9E97 /* Menus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menus.swift; sourceTree = "<group>"; };
 		A050DBCE2ADC6BCB003A230D /* Classroom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Classroom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A050DBD12ADC6BCB003A230D /* ClassroomApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassroomApp.swift; sourceTree = "<group>"; };
 		A050DBD32ADC6BCB003A230D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				A0C0265B2ADDAA3600E3CC81 /* EditClassroomView.swift */,
 				A050DBE92ADC77B0003A230D /* CreateClassroomView.swift */,
 				A050DBEB2ADC78AB003A230D /* StudentView.swift */,
+				A0422C4F2AE3A913005E9E97 /* Menus.swift */,
 			);
 			path = Classroom;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			files = (
 				A050DBE32ADC6C12003A230D /* Class.swift in Sources */,
 				A050DBD42ADC6BCB003A230D /* ContentView.swift in Sources */,
+				A0422C502AE3A913005E9E97 /* Menus.swift in Sources */,
 				A0C0265C2ADDAA3600E3CC81 /* EditClassroomView.swift in Sources */,
 				A050DBE82ADC7669003A230D /* ClassroomView.swift in Sources */,
 				A050DBEA2ADC77B0003A230D /* CreateClassroomView.swift in Sources */,
