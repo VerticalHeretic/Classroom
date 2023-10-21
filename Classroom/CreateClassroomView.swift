@@ -14,7 +14,7 @@ struct CreateClassroomView: View {
 	@Environment(\.modelContext) var context
 	
 	@State private var classroom = Classroom()
-	@State private var student: Student = Student(name: "", surname: "")
+	@State private var creationStudent: Student = Student(name: "", surname: "")
 	@State private var selectedStudents: [Student] = []
 	@Query private var students: [Student]
 	
@@ -27,19 +27,18 @@ struct CreateClassroomView: View {
 			}
 			
 			Section("Add Student") {
-				TextField("Name", text: $student.name)
-				TextField("Surname", text: $student.surname)
+				TextField("Name", text: $creationStudent.name)
+				TextField("Surname", text: $creationStudent.surname)
 				
 				Button {
 					withAnimation {
-						context.insert(student)
-						student = Student(name: "", surname: "")
+						context.insert(creationStudent)
+						creationStudent = Student(name: "", surname: "")
 					}
 				} label: {
 					Text("Add Student")
 				}
-				.disabled(student.name.isEmpty || student.surname.isEmpty)
-
+				.disabled(creationStudent.name.isEmpty || creationStudent.surname.isEmpty)
 			}
 			
 			Section {
