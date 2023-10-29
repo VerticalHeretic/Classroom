@@ -10,13 +10,13 @@ import SwiftData
 
 @Model
 final class Attendance {
-	var student: Student?
-	var classroom: Classroom?
-	var date = Date()
-	
-	init(student: Student, classroom: Classroom, date: Date) {
-		self.student = student
-		self.classroom = classroom
-		self.date = date
-	}
+    var student: Student?
+    var classroom: Classroom?
+    var date = Date()
+
+    init(student: Student, classroom: Classroom, date: Date) {
+        self.student = student
+        self.classroom = classroom
+        self.date = date
+    }
 }

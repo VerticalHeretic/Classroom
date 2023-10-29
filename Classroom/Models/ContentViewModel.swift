@@ -8,12 +8,12 @@
 import Foundation
 
 @Observable final class ContentViewModel {
-    
     var selectedClassroom: Classroom?
     var editedClassroom: Classroom?
     var showCreateClassroom = false
-    
+
     // MARK: Attendance Module
+
     var studentsAttending: [Student] = []
     var attendanceMode = false
 }

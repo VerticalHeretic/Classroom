@@ -5,31 +5,31 @@
 //  Created by Łukasz Stachnik on 15/10/2023.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ClassroomView: View {
     @Environment(\.modelContext) var context
-    
+
     let classroom: Classroom
-    
+
     @Binding var attendanceMode: Bool
-    
+
     @Query var attendance: [Attendance]
-    
+
     private var attendanceForToday: [Attendance] {
-        attendance.filter { Calendar.autoupdatingCurrent.isDateInToday($0.date) && $0.classroom == self.classroom }
+        attendance.filter { Calendar.autoupdatingCurrent.isDateInToday($0.date) && $0.classroom == classroom }
     }
-        
+
     var body: some View {
-		List {
+        List {
             if let students = classroom.students {
                 ForEach(students.sorted(by: { $0.name < $1.name })) { student in
                     HStack {
                         StudentView(student: student, isPresent: attendanceForToday.contains { $0.student == student })
-                       
+
                         Spacer()
-                        
+
                         if attendanceMode {
                             if attendanceForToday.contains(where: { $0.student == student }) {
                                 Image(systemName: "person.crop.rectangle.badge.plus")
@@ -52,12 +52,12 @@ struct ClassroomView: View {
                             }
                         }
                     }
-				}
-			}
-		}
+                }
+            }
+        }
         .navigationTitle(classroom.title)
         #if os(iOS)
-        .toolbar {
+            .toolbar {
                 ToolbarItem {
                     Button {
                         withAnimation {
@@ -67,12 +67,12 @@ struct ClassroomView: View {
                         Label("Attendance Mode", systemImage: "person.fill.checkmark")
                     }
                 }
-        }
+            }
         #endif
     }
 }
 
 #Preview {
     ClassroomView(classroom: .default, attendanceMode: .constant(false))
-		.modelContainer(ClassroomContainer.createPreviewContainer())
+        .modelContainer(ClassroomContainer.createPreviewContainer())
 }
