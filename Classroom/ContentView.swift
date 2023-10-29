@@ -7,23 +7,11 @@
 
 import SwiftUI
 import SwiftData
-import Observation
-
-@Observable final class ContentViewModel {
-    
-    var selectedClassroom: Classroom?
-    var editedClassroom: Classroom?
-    var showCreateClassroom = false
-    
-    // MARK: Attendance Module
-    var studentsAttending: [Student] = []
-    var attendanceMode = false
-}
 
 struct ContentView: View {
 	
 	@Environment(\.modelContext) var context
-	@Query var classrooms: [Classroom]
+    @Query(sort: \Classroom.creationDate, order: .reverse) var classrooms: [Classroom]
     @Bindable var model = ContentViewModel()
 	
 	var body: some View {
@@ -58,7 +46,7 @@ struct ContentView: View {
 				}
 			} detail: {
                 if let selectedClassroom = model.selectedClassroom {
-                    ClassroomView(classroom: selectedClassroom, attendanceMode: $model.attendanceMode, studentsAttending: $model.studentsAttending)
+                    ClassroomView(classroom: selectedClassroom, attendanceMode: $model.attendanceMode)
 				} else {
 					EmptyView()
 				}
@@ -72,22 +60,11 @@ struct ContentView: View {
 					}
 				}
                 
-                if let selectedClassroom = model.selectedClassroom  {
+                if model.selectedClassroom != nil {
                     ToolbarItem {
                         Button {
-                            if model.attendanceMode {
-                                if !model.studentsAttending.isEmpty {
-                                    model.studentsAttending.forEach {
-                                        let attendance = Attendance(student: $0, classroom: selectedClassroom, date: Date(), isPresent: true)
-                                        context.insert(attendance)
-                                    }
-                                    
-                                    model.studentsAttending.removeAll()
-                                }
-                                
-                                model.attendanceMode = false
-                            } else {
-                                model.attendanceMode = true
+                            withAnimation {
+                                model.attendanceMode.toggle()
                             }
                         } label: {
                             Label("Attendance Mode", systemImage: "person.fill.checkmark")
@@ -111,7 +88,7 @@ struct ContentView: View {
 			NavigationView {
 				List(classrooms) { classroom in
 					NavigationLink {
-                        ClassroomView(classroom: classroom, attendanceMode: $model.attendanceMode, studentsAttending: $model.studentsAttending)
+                        ClassroomView(classroom: classroom, attendanceMode: $model.attendanceMode)
 					} label: {
 						VStack(alignment: .leading) {
 							Text(classroom.title)
