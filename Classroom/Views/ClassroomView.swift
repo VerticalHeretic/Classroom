@@ -14,7 +14,6 @@ struct ClassroomView: View {
     let classroom: Classroom
     
     @Binding var attendanceMode: Bool
-    @Binding var studentsAttending: [Student]
     
     @Query var attendance: [Attendance]
     
@@ -24,24 +23,31 @@ struct ClassroomView: View {
         
     var body: some View {
 		List {
-			if let students = classroom.students {
-				ForEach(students) { student in
+            if let students = classroom.students {
+                ForEach(students.sorted(by: { $0.name < $1.name })) { student in
                     HStack {
                         StudentView(student: student, isPresent: attendanceForToday.contains { $0.student == student })
                        
                         Spacer()
                         
                         if attendanceMode {
-                            if studentsAttending.contains(student) {
+                            if attendanceForToday.contains(where: { $0.student == student }) {
                                 Image(systemName: "person.crop.rectangle.badge.plus")
                                     .symbolVariant(.fill)
                                     .onTapGesture {
-                                        studentsAttending.removeAll(where: { $0.id == student.id })
+                                        if let attendance = attendanceForToday.first(where: { $0.student == student }) {
+                                            withAnimation {
+                                                context.delete(attendance)
+                                            }
+                                        }
                                     }
                             } else {
                                 Image(systemName: "person.crop.rectangle.badge.plus")
                                     .onTapGesture {
-                                        studentsAttending.append(student)
+                                        let attendance = Attendance(student: student, classroom: classroom, date: .now)
+                                        withAnimation {
+                                            context.insert(attendance)
+                                        }
                                     }
                             }
                         }
@@ -49,10 +55,24 @@ struct ClassroomView: View {
 				}
 			}
 		}
+        .navigationTitle(classroom.title)
+        #if os(iOS)
+        .toolbar {
+                ToolbarItem {
+                    Button {
+                        withAnimation {
+                            attendanceMode.toggle()
+                        }
+                    } label: {
+                        Label("Attendance Mode", systemImage: "person.fill.checkmark")
+                    }
+                }
+        }
+        #endif
     }
 }
 
 #Preview {
-    ClassroomView(classroom: .default, attendanceMode: .constant(false), studentsAttending: .constant([]))
+    ClassroomView(classroom: .default, attendanceMode: .constant(false))
 		.modelContainer(ClassroomContainer.createPreviewContainer())
 }

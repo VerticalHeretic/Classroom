@@ -16,6 +16,8 @@ final class Classroom {
 	
 	@Relationship(deleteRule: .cascade, inverse: \Attendance.classroom)
 	var attendance: [Attendance]? = []
+    
+    var creationDate = Date()
 	
 	init(title: String = "", students: [Student] = []) {
 		self.students = students

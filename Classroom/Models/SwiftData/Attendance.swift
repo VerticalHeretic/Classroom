@@ -13,12 +13,10 @@ final class Attendance {
 	var student: Student?
 	var classroom: Classroom?
 	var date = Date()
-	var isPresent: Bool = true
 	
-	init(student: Student, classroom: Classroom, date: Date, isPresent: Bool) {
+	init(student: Student, classroom: Classroom, date: Date) {
 		self.student = student
 		self.classroom = classroom
 		self.date = date
-		self.isPresent = isPresent
 	}
 }
