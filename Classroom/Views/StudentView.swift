@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct StudentView: View {
-	var student: Student
+    var student: Student
     var isPresent: Bool?
-	
+
     var body: some View {
-		HStack(spacing: 4) {
-			Text(student.name)
-			Text(student.surname)
-            
+        HStack(spacing: 4) {
+            Text(student.name)
+            Text(student.surname)
+
             Spacer()
-            
+
             if let isPresent, isPresent {
                 Image(systemName: "book")
                     .symbolVariant(.fill)
             }
-		}
+        }
         .padding()
         .frame(height: 24)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -30,6 +30,6 @@ struct StudentView: View {
 }
 
 #Preview {
-	StudentView(student: .init(name: "Jan", surname: "Kowalski"), isPresent: true)
+    StudentView(student: .init(name: "Jan", surname: "Kowalski"), isPresent: true)
         .modelContainer(ClassroomContainer.createPreviewContainer())
 }
