@@ -72,7 +72,7 @@ struct ContentView: View {
 					}
 				}
                 
-                if let selectedClassroom = model.selectedClassroom, let students = selectedClassroom.students {
+                if let selectedClassroom = model.selectedClassroom  {
                     ToolbarItem {
                         Button {
                             if model.attendanceMode {
@@ -82,11 +82,6 @@ struct ContentView: View {
                                         context.insert(attendance)
                                     }
                                     
-                                    students.filter { !model.studentsAttending.contains($0) }.forEach {
-                                        let attendance = Attendance(student: $0, classroom: selectedClassroom, date: Date(), isPresent: false)
-                                        context.insert(attendance)
-                                    }
-                                   
                                     model.studentsAttending.removeAll()
                                 }
                                 

@@ -6,21 +6,28 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ClassroomView: View {
     @Environment(\.modelContext) var context
     
-    var classroom: Classroom
+    let classroom: Classroom
     
     @Binding var attendanceMode: Bool
     @Binding var studentsAttending: [Student]
-
+    
+    @Query var attendance: [Attendance]
+    
+    private var attendanceForToday: [Attendance] {
+        attendance.filter { Calendar.autoupdatingCurrent.isDateInToday($0.date) && $0.classroom == self.classroom }
+    }
+        
     var body: some View {
 		List {
 			if let students = classroom.students {
 				ForEach(students) { student in
                     HStack {
-                        StudentView(student: student)
+                        StudentView(student: student, isPresent: attendanceForToday.contains { $0.student == student })
                        
                         Spacer()
                         
