@@ -1,5 +1,5 @@
 //
-//  Class.swift
+//  Classroom.swift
 //  Classroom
 //
 //  Created by Łukasz Stachnik on 15/10/2023.
